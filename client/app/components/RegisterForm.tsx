@@ -22,7 +22,7 @@ const RegisterForm = ({
     >
       <div className="p-8">
         <div className="text-center mb-6">
-          <h2 className="text-3xl font-bold text-white mb-2">Join Chain Chat</h2>
+          <h2 className="text-3xl font-bold text-white mb-2">Join BTChat</h2>
           <p className="text-gray-400">Create your decentralized identity</p>
         </div>
 
