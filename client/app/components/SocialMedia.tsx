@@ -21,6 +21,12 @@ import FloatingActionButton from "@/app/components/FloatingActionButton";
 
 const CONTRACT_ADDRESS = "0xAC7e400D1cb7b04264555b3a0a3adb2EBA089e9F";
 
+interface UserProfile {
+    username: string;
+    profileImage?: string;
+    address: string;
+}
+
 export default function SocialMediaApp() {
     const [content, setContent] = useState('');
     const [username, setUsername] = useState('');
@@ -65,7 +71,7 @@ export default function SocialMediaApp() {
                 address: CONTRACT_ADDRESS,
                 functionName: 'getPostsCount',
                 args: [],
-            });
+            }) as bigint;
 
             const postsFetched = [];
 
@@ -75,7 +81,7 @@ export default function SocialMediaApp() {
                     address: CONTRACT_ADDRESS,
                     functionName: 'getPost',
                     args: [BigInt(i)],
-                });
+                }) as [string, string, string, bigint, bigint, bigint, bigint];;
 
                 const postObj = {
                     id: i,
@@ -96,7 +102,7 @@ export default function SocialMediaApp() {
                         address: CONTRACT_ADDRESS,
                         functionName: 'getComment',
                         args: [BigInt(i), BigInt(j)],
-                    });
+                    }) as [string, string, bigint];;
 
                     postObj.comments.push({
                         commenter: comment[0],
@@ -253,7 +259,7 @@ export default function SocialMediaApp() {
                 address: CONTRACT_ADDRESS,
                 functionName: 'getUserStats',
                 args: [address],
-            });
+            }) as [bigint, bigint, bigint];;
 
             setUserStats({
                 posts: Number(result[0]),
@@ -305,6 +311,22 @@ export default function SocialMediaApp() {
             toast.error("Failed to update profile");
         }
     };
+
+    const getUserByAddress = async (address: string): Promise<UserProfile> => {
+        const user = await readContract(wagmiConfig, {
+            abi: BTCHAT_ABI,
+            address: CONTRACT_ADDRESS,
+            functionName: "getUserByAddress",
+            args: [address],
+        }) as [string, string, string];
+
+        return {
+            username: user[0],
+            profileImage: user[1],
+            address: user[2],
+        };
+    };
+
 
 
 
@@ -412,9 +434,7 @@ export default function SocialMediaApp() {
                                         onLike={likePost}
                                         onComment={addComment}
                                         isRegistered={!!registeredUser}
-                                        signer={walletClient}
-                                        getUserByAddress={() => fetchUser()}
-                                        loading={isLoading}
+                                        getUserByAddress={getUserByAddress}
                                     />
                                 ))}
                             </div>

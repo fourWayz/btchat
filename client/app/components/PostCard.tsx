@@ -35,7 +35,7 @@ interface Props {
   post: Post;
   onLike: (postId: number) => void;
   onComment: (postId: number, comment: string) => void;
-  onShare: (postId: number) => Promise<void>;
+//   onShare: (postId: number) => Promise<void>;
   isRegistered: boolean;
   getUserByAddress: (address: string) => Promise<UserProfile>;
 }
@@ -44,7 +44,7 @@ const PostCard: React.FC<Props> = ({
   post,
   onLike,
   onComment,
-  onShare,
+//   onShare,
   isRegistered,
   getUserByAddress,
 }) => {
@@ -64,18 +64,18 @@ const PostCard: React.FC<Props> = ({
     fetchProfile();
   }, [post.author]);
 
-  const handleShare = async () => {
-    try {
-      setIsSharing(true);
-      await onShare(post.id);
-      toast.success('Post shared successfully!');
-    } catch (err) {
-      console.error('Failed to share:', err);
-      toast.error('Failed to share post');
-    } finally {
-      setIsSharing(false);
-    }
-  };
+//   const handleShare = async () => {
+//     try {
+//       setIsSharing(true);
+//       await onShare(post.id);
+//       toast.success('Post shared successfully!');
+//     } catch (err) {
+//       console.error('Failed to share:', err);
+//       toast.error('Failed to share post');
+//     } finally {
+//       setIsSharing(false);
+//     }
+//   };
 
   const copyAddress = () => {
     navigator.clipboard.writeText(post.author);
@@ -141,14 +141,14 @@ const PostCard: React.FC<Props> = ({
             <span>{post.comments.length}</span>
           </button>
         </div>
-        <button
+        {/* <button
           onClick={handleShare}
           disabled={isSharing}
           className={`flex items-center space-x-1 ${isSharing ? 'text-gray-500' : 'hover:text-green-400'}`}
         >
           <FaShare />
           <span>{isSharing ? 'Sharing...' : 'Share'}</span>
-        </button>
+        </button> */}
       </div>
 
       {/* Comments */}
