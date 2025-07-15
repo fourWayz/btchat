@@ -2,7 +2,10 @@
 import { motion } from "framer-motion";
 import WalletConnect from "./WalletConnect";
 
-const NavBar: React.FC = () => {
+interface NavBarProps {
+  children?: React.ReactNode;
+}
+const NavBar: React.FC<NavBarProps> = ({ children }) => {
   return (
     <motion.nav
       initial={{ y: -100 }}

@@ -19,7 +19,7 @@ import PostCard from "@/app/components/PostCard";
 import UserProfile from "@/app/components/UserProfile";
 import FloatingActionButton from "@/app/components/FloatingActionButton";
 
-const CONTRACT_ADDRESS = "0xYourBTChatContractAddress";
+const CONTRACT_ADDRESS = "0xAC7e400D1cb7b04264555b3a0a3adb2EBA089e9F";
 
 export default function SocialMediaApp() {
     const [content, setContent] = useState('');
