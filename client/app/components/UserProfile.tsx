@@ -166,7 +166,7 @@ const UserProfile: React.FC<UserProfileProps> = ({
               {user.balance && (
                 <div className="mt-2 flex items-center">
                   <span className="bg-purple-500/20 text-purple-400 px-2 py-1 rounded-md text-xs font-mono">
-                    {parseFloat(user.balance).toFixed(2)} CCT
+                    {parseFloat(user.balance).toFixed(2)} CBTC
                   </span>
                   {connectedWallet && (
                     <span className="ml-2 text-xs text-gray-400">
@@ -186,7 +186,7 @@ const UserProfile: React.FC<UserProfileProps> = ({
             </div>
           )}
         </div>
-
+{/* 
         {!authenticated && (
           <button
             onClick={login}
@@ -194,7 +194,7 @@ const UserProfile: React.FC<UserProfileProps> = ({
           >
             Connect Social Accounts
           </button>
-        )}
+        )} */}
 
         {/* Editable Section */}
         <div className="mt-6 space-y-3">

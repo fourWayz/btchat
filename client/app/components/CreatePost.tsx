@@ -29,7 +29,7 @@ const CreatePost = ({
   const [postCost, setPostCost] = useState<number>(10);
 
   useEffect(() => {
-    setPostCost(10); 
+    setPostCost(0); 
   }, []);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -111,7 +111,7 @@ const CreatePost = ({
           {freePosts > 0 ? (
             <span>Free posts remaining: {freePosts}</span>
           ) : (
-            <span>Cost: {postCost} CCT</span>
+            <span>Cost: {postCost} CBTC</span>
           )}
         </div>
 
