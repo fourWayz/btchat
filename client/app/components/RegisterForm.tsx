@@ -1,17 +1,19 @@
+"use client";
 import { motion } from "framer-motion";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 const RegisterForm = ({
   username,
   setUsername,
   registerUser,
   isLoading,
-   isWalletConnected
+  isWalletConnected,
 }: {
   username: string;
   setUsername: (username: string) => void;
   registerUser: () => void;
   isLoading: boolean;
-   isWalletConnected : boolean
+  isWalletConnected: boolean;
 }) => {
   return (
     <motion.div
@@ -28,7 +30,10 @@ const RegisterForm = ({
 
         <div className="space-y-6">
           <div>
-            <label htmlFor="username" className="block text-sm font-medium text-gray-300 mb-2">
+            <label
+              htmlFor="username"
+              className="block text-sm font-medium text-gray-300 mb-2"
+            >
               Choose a username
             </label>
             <input
@@ -41,34 +46,34 @@ const RegisterForm = ({
             />
           </div>
 
-         <button
-          onClick={registerUser}
-          // disabled={!isWalletConnected } 
-          className={`w-full ${
-            !isWalletConnected 
-              ? "bg-gray-600 cursor-not-allowed"
-              : isLoading
-                ? "bg-purple-600"
-                : "bg-purple-500 hover:bg-purple-600"
-          }`}
-        >
+          {/* Conditional button */}
           {!isWalletConnected ? (
-            "Connect Wallet First"
-          ) : isLoading ? (
-            <>
-              <span className="spinner-border spinner-border-sm me-2"></span>
-              Registering...
-            </>
+            <div className="space-y-3">
+              <ConnectButton />
+              <div className="text-yellow-400 text-sm">
+                Please connect your wallet before registering
+              </div>
+            </div> 
           ) : (
-            "Complete Registration"
+            <button
+              onClick={registerUser}
+              disabled={isLoading}
+              className={`w-full py-3 rounded-lg text-white font-medium ${
+                isLoading
+                  ? "bg-purple-600 cursor-not-allowed"
+                  : "bg-purple-500 hover:bg-purple-600"
+              }`}
+            >
+              {isLoading ? (
+                <>
+                  <span className="spinner-border spinner-border-sm me-2"></span>
+                  Registering...
+                </>
+              ) : (
+                "Complete Registration"
+              )}
+            </button>
           )}
-        </button>
-
-         {!isWalletConnected && (
-          <div className="text-yellow-400 text-sm mt-2">
-            Please connect your wallet before registering
-          </div>
-        )}
         </div>
       </div>
     </motion.div>
